@@ -1,10 +1,6 @@
 package com.github.jk1.license.reader
 
-import com.github.jk1.license.License
-import com.github.jk1.license.PomData
-import com.github.jk1.license.PomDeveloper
-import com.github.jk1.license.PomOrganization
-import com.github.jk1.license.ReportTask
+import com.github.jk1.license.*
 import com.github.jk1.license.util.CachingArtifactResolver
 import com.github.jk1.license.util.Files
 import groovy.util.slurpersupport.GPathResult
@@ -138,7 +134,8 @@ class PomReader {
 
         pomData.name = pomContent.name?.text()
         pomData.description = pomContent.description?.text()
-        pomData.projectUrl = pomContent.url?.text()
+        String projectUrl = pomContent.url?.text()
+        pomData.projectUrl = (projectUrl == null || projectUrl.isEmpty()) ? pomData.projectUrl : projectUrl
         pomData.inceptionYear = pomContent.inceptionYear?.text()
 
         def organizationName = pomContent.organization?.name?.text()
