@@ -50,7 +50,9 @@ class ConfigurationReader {
                 LOGGER.debug("Not collecting dependency ${root.name} due to explicit exclude configured")
                 accumulator.add(root)
             }
-            root.children.each {collectDependencies(accumulator, it)}
+            root.children.each(){
+                LOGGER.debug("Not including dependency child ${it.name}")
+            }
         }
         accumulator
     }
